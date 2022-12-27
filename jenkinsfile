@@ -1,30 +1,33 @@
-pipeline{
- agent any
- stages{
-   stage('prepare'){
-    steps{
-	   git branch: 'main', url: 'https://github.com/Dhanaraj2512/quick-sync.git'
-	 }
-   }
-   stage('build'){
-     steps{
-	   sh 'mvn clean install'
-	 }
-   }
-   stage('deploy-dev'){
-     steps{
-	   echo "deploying an app in devo"
-	 }
-   }
-   stage('deploy-stage'){
-     steps{
-	   input 'give an approval'
-	   echo "deploying an app in stage"
-	 }
-   }
-   stage('build'){
-     steps{
-	   sh 'mvn clean install'
-	 }
-   }
+pipeline {
+    agent any
+
+    stages {
+        stage('prepare') {
+            steps {
+                git branch: 'main', url: 'https://github.com/quick-abc/maven-sync.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+        stage('deploy-dev') {
+            steps {
+                echo "deploying an appln in devo"
+            }
+        }
+         stage('deploy-stage') {
+            steps {
+                input 'give an approval'
+                echo "deploying an appln in stage"
+            }
+        }
+        stage('deploy-prod') {
+            steps {
+                input 'give an approval'
+                echo "deploying an appln in prod"
+            }
+        }
+    }
 }
